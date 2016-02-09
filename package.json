@@ -1,0 +1,21 @@
+{
+  "name": "react-template",
+  "version": "1.0.0",
+  "description": "template for all React apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -d --watch",
+    "build": "webpack -p"
+  },
+  "author": "Tim Bell",
+  "license": "ISC",
+  "dependencies": {
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  }
+}
+

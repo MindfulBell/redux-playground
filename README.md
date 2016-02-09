@@ -1,0 +1,1 @@
+React template using webpack/babel to build react applications
