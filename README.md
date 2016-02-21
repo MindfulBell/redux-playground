@@ -1,6 +1,7 @@
 React template using webpack/babel to build react applications 
 
 
+1. Run NPM Install
 
 //commands to know:
 //npm run dev --> turns on webpack watch for updating changes
@@ -14,5 +15,5 @@ React template using webpack/babel to build react applications
 
 //c9.io: won't allow .babelrc, so have to put it in package.json: 
   //"babel": {
-    // my babel config here
+    "presets": ["es2015", "react"]
   //}
