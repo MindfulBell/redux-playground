@@ -61,9 +61,13 @@
 	
 	var _bootstrap2 = _interopRequireDefault(_bootstrap);
 	
-	var _recipeBox = __webpack_require__(/*! ./recipe-box.jsx */ 88);
+	var _recipeList = __webpack_require__(/*! ./recipe-list.jsx */ 89);
 	
-	var _recipeBox2 = _interopRequireDefault(_recipeBox);
+	var _recipeList2 = _interopRequireDefault(_recipeList);
+	
+	var _addbox = __webpack_require__(/*! ./addbox.jsx */ 88);
+	
+	var _addbox2 = _interopRequireDefault(_addbox);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -75,6 +79,10 @@
 	
 	__webpack_require__(/*! style!css!sass!../public/css/style.scss */ 179);
 	
+	//What this app showcases: play with local storage, lifecycle
+	
+	//NEXT: adding recipes and how taht changes local storage and state
+	
 	var App = function (_Component) {
 	    _inherits(App, _Component);
 	
@@ -83,400 +91,58 @@
 	
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
 	
-	        _this.state = {};
+	        _this.state = {
+	            recipes: []
+	        };
 	        return _this;
 	    }
 	
+	    //format for recipe in local storage:
+	    //title: {
+	    //ingredients: []
+	    //image?: ''
+	    //instructions: ''}
+	
 	    _createClass(App, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            localStorage.clear();
+	            if (localStorage.length === 0) {
+	                localStorage.setItem('recipe1', JSON.stringify({
+	                    recipeName: 'Pickled Onions',
+	                    ingredients: ['Red onions', 'Red wine vinegar', 'Salt', 'Pepper'],
+	                    instructions: 'Combine half cup of red wine vinegar with half cup of water \
+	                add salt and pepper to taste, add a thinly sliced red onion. Let sit for at least 30 minutes'
+	                }));
+	            }
+	            var retrieved = JSON.parse(localStorage.getItem('recipe1'));
+	            var myArr = this.state.recipes;
+	            myArr.push(retrieved);
+	            this.setState({
+	                recipes: myArr
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {}
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            console.log(this.state.recipes);
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'container' },
+	                null,
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'row' },
+	                    { className: 'recipe-box container container-fluid' },
 	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-sm-3 col-md-3' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'panel-group', id: 'accordion' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'panel panel-default' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'panel-heading' },
-	                                    _react2.default.createElement(
-	                                        'h4',
-	                                        { className: 'panel-title' },
-	                                        _react2.default.createElement(
-	                                            'a',
-	                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapseOne' },
-	                                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-folder-close' }),
-	                                            'Content'
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { id: 'collapseOne', className: 'panel-collapse collapse in' },
-	                                    _react2.default.createElement(
-	                                        'div',
-	                                        { className: 'panel-body' },
-	                                        _react2.default.createElement(
-	                                            'table',
-	                                            { className: 'table' },
-	                                            _react2.default.createElement(
-	                                                'tbody',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'tr',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'td',
-	                                                        null,
-	                                                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-pencil text-primary' }),
-	                                                        _react2.default.createElement(
-	                                                            'a',
-	                                                            { href: 'http://www.jquery2dotnet.com' },
-	                                                            'Articles'
-	                                                        )
-	                                                    )
-	                                                ),
-	                                                _react2.default.createElement(
-	                                                    'tr',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'td',
-	                                                        null,
-	                                                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-flash text-success' }),
-	                                                        _react2.default.createElement(
-	                                                            'a',
-	                                                            { href: 'http://www.jquery2dotnet.com' },
-	                                                            'News'
-	                                                        )
-	                                                    )
-	                                                ),
-	                                                _react2.default.createElement(
-	                                                    'tr',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'td',
-	                                                        null,
-	                                                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-file text-info' }),
-	                                                        _react2.default.createElement(
-	                                                            'a',
-	                                                            { href: 'http://www.jquery2dotnet.com' },
-	                                                            'Newsletters'
-	                                                        )
-	                                                    )
-	                                                ),
-	                                                _react2.default.createElement(
-	                                                    'tr',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'td',
-	                                                        null,
-	                                                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-comment text-success' }),
-	                                                        _react2.default.createElement(
-	                                                            'a',
-	                                                            { href: 'http://www.jquery2dotnet.com' },
-	                                                            'Comments'
-	                                                        ),
-	                                                        _react2.default.createElement(
-	                                                            'span',
-	                                                            { className: 'badge' },
-	                                                            '42'
-	                                                        )
-	                                                    )
-	                                                )
-	                                            )
-	                                        )
-	                                    )
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'panel panel-default' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'panel-heading' },
-	                                    _react2.default.createElement(
-	                                        'h4',
-	                                        { className: 'panel-title' },
-	                                        _react2.default.createElement(
-	                                            'a',
-	                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapseTwo' },
-	                                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-th' }),
-	                                            'Modules'
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { id: 'collapseTwo', className: 'panel-collapse collapse' },
-	                                    _react2.default.createElement(
-	                                        'div',
-	                                        { className: 'panel-body' },
-	                                        _react2.default.createElement(
-	                                            'table',
-	                                            { className: 'table' },
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Orders'
-	                                                    ),
-	                                                    ' ',
-	                                                    _react2.default.createElement(
-	                                                        'span',
-	                                                        { className: 'label label-success' },
-	                                                        '$ 320'
-	                                                    )
-	                                                )
-	                                            ),
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Invoices'
-	                                                    )
-	                                                )
-	                                            ),
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Shipments'
-	                                                    )
-	                                                )
-	                                            ),
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Tex'
-	                                                    )
-	                                                )
-	                                            )
-	                                        )
-	                                    )
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'panel panel-default' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'panel-heading' },
-	                                    _react2.default.createElement(
-	                                        'h4',
-	                                        { className: 'panel-title' },
-	                                        _react2.default.createElement(
-	                                            'a',
-	                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapseThree' },
-	                                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-user' }),
-	                                            'Account'
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { id: 'collapseThree', className: 'panel-collapse collapse' },
-	                                    _react2.default.createElement(
-	                                        'div',
-	                                        { className: 'panel-body' },
-	                                        _react2.default.createElement(
-	                                            'table',
-	                                            { className: 'table' },
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Change Password'
-	                                                    )
-	                                                )
-	                                            ),
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Notifications'
-	                                                    ),
-	                                                    ' ',
-	                                                    _react2.default.createElement(
-	                                                        'span',
-	                                                        { className: 'label label-info' },
-	                                                        '5'
-	                                                    )
-	                                                )
-	                                            ),
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Import/Export'
-	                                                    )
-	                                                )
-	                                            ),
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-trash text-danger' }),
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com', className: 'text-danger' },
-	                                                        'Delete Account'
-	                                                    )
-	                                                )
-	                                            )
-	                                        )
-	                                    )
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'panel panel-default' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'panel-heading' },
-	                                    _react2.default.createElement(
-	                                        'h4',
-	                                        { className: 'panel-title' },
-	                                        _react2.default.createElement(
-	                                            'a',
-	                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapseFour' },
-	                                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-file' }),
-	                                            'Reports'
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { id: 'collapseFour', className: 'panel-collapse collapse' },
-	                                    _react2.default.createElement(
-	                                        'div',
-	                                        { className: 'panel-body' },
-	                                        _react2.default.createElement(
-	                                            'table',
-	                                            { className: 'table' },
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-usd' }),
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Sales'
-	                                                    )
-	                                                )
-	                                            ),
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-user' }),
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Customers'
-	                                                    )
-	                                                )
-	                                            ),
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-tasks' }),
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Products'
-	                                                    )
-	                                                )
-	                                            ),
-	                                            _react2.default.createElement(
-	                                                'tr',
-	                                                null,
-	                                                _react2.default.createElement(
-	                                                    'td',
-	                                                    null,
-	                                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-shopping-cart' }),
-	                                                    _react2.default.createElement(
-	                                                        'a',
-	                                                        { href: 'http://www.jquery2dotnet.com' },
-	                                                        'Shopping Cart'
-	                                                    )
-	                                                )
-	                                            )
-	                                        )
-	                                    )
-	                                )
-	                            )
-	                        )
+	                        'h2',
+	                        null,
+	                        'Recipe Box'
 	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-sm-9 col-md-9' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'well' },
-	                            _react2.default.createElement(
-	                                'h1',
-	                                null,
-	                                'Accordion Menu With Icon'
-	                            ),
-	                            'Admin Dashboard Accordion Menu'
-	                        )
-	                    )
-	                )
+	                    _react2.default.createElement(_recipeList2.default, { recipe: this.state.recipes })
+	                ),
+	                _react2.default.createElement(_addbox2.default, null)
 	            );
 	        }
 	    }]);
@@ -21180,9 +20846,9 @@
 
 /***/ },
 /* 88 */
-/*!***************************************!*\
-  !*** ./src/client/app/recipe-box.jsx ***!
-  \***************************************/
+/*!***********************************!*\
+  !*** ./src/client/app/addbox.jsx ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21197,10 +20863,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _recipeList = __webpack_require__(/*! ./recipe-list.jsx */ 89);
-	
-	var _recipeList2 = _interopRequireDefault(_recipeList);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21209,34 +20871,73 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var RecipeBox = function (_Component) {
-	  _inherits(RecipeBox, _Component);
+	var AddBox = function (_Component) {
+	  _inherits(AddBox, _Component);
 	
-	  function RecipeBox(props) {
-	    _classCallCheck(this, RecipeBox);
+	  function AddBox(props) {
+	    _classCallCheck(this, AddBox);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RecipeBox).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AddBox).call(this, props));
 	
 	    _this.state = {};
 	    return _this;
 	  }
 	
-	  _createClass(RecipeBox, [{
+	  _createClass(AddBox, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'recipe-box container container-fluid' },
-	        'asdf',
-	        _react2.default.createElement(_recipeList2.default, null)
+	        { className: 'container', id: 'addPopUp' },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Add Your Recipe!'
+	        ),
+	        _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' }),
+	        _react2.default.createElement(
+	          'form',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group', id: 'recipeAdd' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'recipeName' },
+	              'Recipe Name'
+	            ),
+	            _react2.default.createElement('input', { type: 'recipe', className: 'form-control', id: 'recipeInput', placeholder: 'Name your recipe!' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group', id: 'ingredientAdd' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'ingredientList' },
+	              'Ingredients'
+	            ),
+	            _react2.default.createElement('textarea', { type: 'ingredients', className: 'form-control', id: 'ingredientInput', rows: '3', 'max-width': '250px',
+	              placeholder: 'List your ingredients separated by commas!' })
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', className: 'btn btn-primary' },
+	            'Add Recipe'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'close', className: 'btn btn-danger' },
+	            'Close'
+	          )
+	        )
 	      );
 	    }
 	  }]);
 	
-	  return RecipeBox;
+	  return AddBox;
 	}(_react.Component);
 	
-	exports.default = RecipeBox;
+	exports.default = AddBox;
 
 /***/ },
 /* 89 */
@@ -21248,10 +20949,8 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+	  value: true
 	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(/*! react */ 34);
 	
@@ -21263,33 +20962,21 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var RecipeList = function RecipeList(props) {
+	  console.log(props.recipe);
 	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	  //build the recipe array here
+	  var recipeList = props.recipe.map(function (recipe, ind) {
+	    return _react2.default.createElement(_recipe2.default, { key: ind, ingredients: recipe.ingredients, recipeName: recipe.recipeName,
+	      instructions: recipe.instructions });
+	  });
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var RecipeList = function (_Component) {
-			_inherits(RecipeList, _Component);
-	
-			function RecipeList(props) {
-					_classCallCheck(this, RecipeList);
-	
-					var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RecipeList).call(this, props));
-	
-					_this.state = {};
-					return _this;
-			}
-	
-			_createClass(RecipeList, [{
-					key: 'render',
-					value: function render() {
-							return;
-					}
-			}]);
-	
-			return RecipeList;
-	}(_react.Component);
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'panel-group row', id: 'accordion', role: 'tab-list', 'aria-multiselectable': 'true' },
+	    recipeList
+	  );
+	};
 	
 	exports.default = RecipeList;
 
@@ -21303,7 +20990,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21321,25 +21008,86 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Recipe = function (_Component) {
-			_inherits(Recipe, _Component);
+	  _inherits(Recipe, _Component);
 	
-			function Recipe(props) {
-					_classCallCheck(this, Recipe);
+	  function Recipe(props) {
+	    _classCallCheck(this, Recipe);
 	
-					var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Recipe).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Recipe).call(this, props));
 	
-					_this.state = {};
-					return _this;
-			}
+	    _this.state = {};
+	    return _this;
+	  }
 	
-			_createClass(Recipe, [{
-					key: 'render',
-					value: function render() {
-							return;
-					}
-			}]);
+	  _createClass(Recipe, [{
+	    key: 'render',
+	    value: function render() {
+	      var ingredients = this.props.ingredients.map(function (ingredient, ind) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: ind },
+	          ingredient
+	        );
+	      });
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'panel panel-default' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-heading', role: 'tab', id: 'headingOne' },
+	          _react2.default.createElement(
+	            'h4',
+	            { className: 'panel-title' },
+	            _react2.default.createElement(
+	              'a',
+	              { role: 'button', 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#recipeOne', 'aria-expanded': 'false', 'aria-controls': 'recipeOne' },
+	              this.props.recipeName
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'recipeOne', className: 'panel-collapse collapse', role: 'tabpanel', 'aria-labelledby': 'headingOne' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body' },
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Ingredients'
+	            ),
+	            _react2.default.createElement(
+	              'ul',
+	              null,
+	              ingredients
+	            ),
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Instructions'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              this.props.instructions
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'delete', className: 'btn btn-danger' },
+	              'Delete'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'edit', className: 'btn' },
+	              'Edit'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
 	
-			return Recipe;
+	  return Recipe;
 	}(_react.Component);
 	
 	exports.default = Recipe;
@@ -23831,7 +23579,7 @@
 	
 	
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, ".recipe-box {\n  background-color: gray; }\n  .recipe-box h2 {\n    text-align: center; }\n\n.row {\n  width: 90%;\n  margin: 10px auto; }\n\n#addPopUp {\n  width: 500px;\n  z-index: 1; }\n  #addPopUp h4 {\n    display: inline; }\n  #addPopUp span {\n    display: inline;\n    float: right;\n    cursor: pointer; }\n", ""]);
 	
 	// exports
 

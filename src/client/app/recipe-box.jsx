@@ -12,7 +12,8 @@ class RecipeBox extends Component {
 
   render () {
     return(
-    	<div className='recipe-box container container-fluid'>asdf
+    	<div className='recipe-box container container-fluid'>
+      <h2>Recipe Box</h2>
     		<RecipeList />
     	</div>
     	)
