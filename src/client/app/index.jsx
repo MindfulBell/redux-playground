@@ -11,54 +11,56 @@ require("!style!css!sass!../public/css/style.scss");
 
 class App extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 
 		this.state = {
             recipes: []
-		}
+		};
 	}
-
-    //format for recipe in local storage:
-    //title: {
-    //ingredients: []
-    //image?: ''
-    //instructions: ''}
 
     componentWillMount() {
         localStorage.clear();
         if (localStorage.length === 0) {
-            localStorage.setItem('recipe1', JSON.stringify({
+            localStorage.setItem('RECIPE_default', JSON.stringify({
                 recipeName: 'Pickled Onions',
                 ingredients: ['Red onions', 'Red wine vinegar', 'Salt', 'Pepper'],
                 instructions: 'Combine half cup of red wine vinegar with half cup of water \
                 add salt and pepper to taste, add a thinly sliced red onion. Let sit for at least 30 minutes'
-            }))
+            }));
         }
-        const retrieved = JSON.parse(localStorage.getItem('recipe1'));
-        const myArr = this.state.recipes
-        myArr.push(retrieved);
-        this.setState({
-            recipes: myArr
-        })
-
-
+        this.storageToState('RECIPE_default');
     }
-
-
+    
     componentDidMount() {
 
     }
-
+    
+    storageToState(recipeName){
+        const retrieved = JSON.parse(localStorage.getItem(`RECIPE_${recipeName}`));
+        const myArr = this.state.recipes;
+        myArr.push(retrieved);
+        this.setState({
+            recipes: myArr
+        });
+    }
+    //COMBINE THESE INTO ONE FUNCTION?!
+    recipeToStorage(name, ingredients, instructions) {
+        localStorage.setItem(`RECIPE_${name}`, JSON.stringify({
+            recipeName: name,
+            ingredients: ingredients,
+            instructions: instructions
+        }));
+    }
+    
     render () {
-        console.log(this.state.recipes)
-    return (
-    <div>
-        <div className='recipe-box container container-fluid'>
-          <h2>Recipe Box</h2>
-            <RecipeList recipe={this.state.recipes} />        
+        return (
+        <div>
+            <div className='recipe-box container container-fluid'>
+              <h2>Recipe Box</h2>
+                <RecipeList recipe={this.state.recipes} />        
+            </div>
+            <AddBox recipeToStorage={this.recipeToStorage.bind(this)} storageToState={this.storageToState.bind(this)}/>
         </div>
-    <AddBox />
-    </div>
     )
   }
 }
