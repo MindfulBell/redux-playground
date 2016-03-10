@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import Recipe from './recipe.jsx';
 
 const RecipeList = (props) => {
-	console.log(props.recipe)
 
 	//build the recipe array here
 	const recipeList = props.recipe.map((recipe, ind) => {
-  		return <Recipe key={ind} ingredients={recipe.ingredients} recipeName={recipe.recipeName}
-  		instructions={recipe.instructions} />
+  		return <Recipe key={ind} ident={ind} ingredients={recipe.ingredients} recipeName={recipe.recipeName}
+  		instructions={recipe.instructions} handleRecipe={props.handleRecipe}/>
 	});
   	
     return  (
