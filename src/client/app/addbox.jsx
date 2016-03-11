@@ -15,6 +15,7 @@ class AddBox extends Component {
 		};
 	}
 	
+	
 	handleChange(val){
 	  if (val.id === 'recipeInput') {
 	    this.setState({
