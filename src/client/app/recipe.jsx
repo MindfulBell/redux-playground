@@ -8,13 +8,9 @@ class Recipe extends Component {
 		this.state = {
       ingredients: this.props.ingredients,
       instructions: this.props.instructions,
-      recipeName: this.props.recipeName
+      recipeName: this.props.recipeName      
 		}
 	}
-	
-		handleEdit(){
-			
-		}
 
   render () {
   	const ingredientArr = this.state.ingredients.map((ingredient, ind)=>{
@@ -44,7 +40,8 @@ class Recipe extends Component {
 			    	</p>
 			    	<button type='delete' id='delButton' className='btn btn-danger'
             onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)}>Delete</button>
-			    	<button type='edit' className='btn' data-toggle='modal' data-target='#addPopUp'>Edit</button>
+			    	<button type='edit' id='editButton' className='btn' data-toggle='modal' data-target='#addPopUp' 
+            onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)}>Edit</button>
 		    	</div>
     		</div>
     	</div>

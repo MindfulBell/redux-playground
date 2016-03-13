@@ -4,18 +4,15 @@ import Bootstrap from 'bootstrap';
 
 //ADD vs EDIT text on the pop up box...
 class AddBox extends Component {
-	constructor(props) {
-		super(props)
-
+	constructor(props) {		
+		super(props)		
 		this.state = {
-		  recipeVal: '',
-		  ingredientsVal: '',
-		  instructionsVal: '',
-
+			recipeVal: props.editRecipe.recipeName,
+			ingredientsVal: props.editRecipe.ingredients,
+			instructionsVal: props.editRecipe.instructions
 		};
 	}
-	
-	
+
 	handleChange(val){
 	  if (val.id === 'recipeInput') {
 	    this.setState({
@@ -36,7 +33,6 @@ class AddBox extends Component {
 	
 	handleSubmit(event) {
 	  event.preventDefault();
-	  console.log(event.target)
 	  if (this.state.ingredientsVal !== '' && this.state.instructionsVal !== '' && this.state.recipeVal !== '') {
 		  const ingredientsArr = this.state.ingredientsVal.split(',');
 
@@ -52,7 +48,13 @@ class AddBox extends Component {
 		}
 	}
 	
-	//handle close
+	handleClose(event){
+		this.setState({
+			recipeVal: '',
+			ingredientsVal: '',
+			instructionsVal: ''
+		})
+	}
 
 //e.preventDefault() for the submit button
   render () {
@@ -88,11 +90,11 @@ class AddBox extends Component {
 			            placeholder='Write out your instructions!' value={this.state.instructionsVal} 
 			            onChange={event => this.handleChange(event.target)}></textarea>
 			          </div>
-			          <button type='submit' id='addButton' className='btn btn-primary' onClick={this.handleSubmit.bind(this)}>Add Recipe</button>			          
+			          <button type='submit' id='addButton' className='btn btn-primary' onClick={this.handleSubmit.bind(this)}>Save</button>			          
 			        </form>
 	      		</div>
 	      		<div className='modal-footer'>
-	      			<button type='button' className='btn btn-danger' data-dismiss='modal'>Close</button>
+	      			<button type='button' className='btn btn-danger' data-dismiss='modal' >Close</button>
 			    </div>
 	      	</div>
 	    </div>	    

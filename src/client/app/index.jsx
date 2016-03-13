@@ -8,17 +8,15 @@ require("!style!css!sass!../public/css/style.scss");
 //What this app showcases: play with local storage, lifecycle
 
 //NEXT: EDITING a recipe
-//1. click on edit button
-//2. popup box appears with details of that recipe filled in already (get from state?)
-//3. edit away (state updating)
-//4. save changes to storage and state
+//1. Maybe move the Addbox to render with Recipe? So confused...
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-            recipes: []
+            recipes: [],
+            recipeToEdit: {}
 		};
 	}
 
@@ -34,10 +32,6 @@ class App extends Component {
             recipes: JSON.parse(localStorage.getItem('recipes'))
         })              
     }
-    
-    componentDidMount() {
-       
-    }
 
     handleRecipe(ind, btnType, name, ingredients, instructions) {
         const recipeArr = JSON.parse(localStorage.getItem('recipes'));
@@ -46,10 +40,16 @@ class App extends Component {
                 recipeName: name,
                 ingredients: ingredients,
                 instructions: instructions
-            });                       
+            });                    
         }
         else if (btnType === 'delButton') {
             recipeArr.splice(ind, 1)
+        }
+        else if (btnType === 'editButton') {  
+        console.log('edit fired')          
+            this.setState({
+                recipeToEdit: recipeArr[ind]
+            })
         }
         localStorage.setItem('recipes', JSON.stringify(recipeArr)); 
         this.setState({
@@ -58,14 +58,15 @@ class App extends Component {
     }
     
     render () {
+        console.log(this.state.recipeToEdit) // logs updated recipeToEdit i.e. recipeArr[ind]
         return (
         <div>
             <div className='recipe-box container container-fluid'>
               <h2>Recipe Box</h2>
-                <RecipeList recipe={this.state.recipes} handleRecipe={this.handleRecipe.bind(this)}/>        
+                <RecipeList recipe={this.state.recipes} handleRecipe={this.handleRecipe.bind(this)} />        
             </div>
-            <button type='button' className='btn btn-default btn-primary' data-toggle='modal' data-target='#addPopUp'>Add Recipe</button>
-            <AddBox handleRecipe={this.handleRecipe.bind(this)}/>
+            <button type='button' className='btn btn-default btn-primary' data-toggle='modal' data-target='#addPopUp'>Add Recipe</button> 
+            <AddBox handleRecipe={this.handleRecipe.bind(this)} editRecipe={this.state.recipeToEdit} />           
         </div>
     )
   }
