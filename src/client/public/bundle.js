@@ -84,6 +84,8 @@
 	//NEXT: EDITING a recipe
 	//1. Maybe move the Addbox to render with Recipe? So confused...
 	
+	//fix Delete, does not work...
+	
 	var App = function (_Component) {
 	    _inherits(App, _Component);
 	
@@ -126,7 +128,6 @@
 	            } else if (btnType === 'delButton') {
 	                recipeArr.splice(ind, 1);
 	            } else if (btnType === 'editButton') {
-	                console.log('edit fired');
 	                this.setState({
 	                    recipeToEdit: recipeArr[ind]
 	                });
@@ -135,11 +136,12 @@
 	            this.setState({
 	                recipes: JSON.parse(localStorage.getItem('recipes'))
 	            });
+	            //isnt it re-rendering here when i setState, so shouldn't the list of recipes
+	            //re-render also down the component chain reflecting the deleted recipe?      
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            console.log(this.state.recipeToEdit); // logs updated recipeToEdit i.e. recipeArr[ind]
 	            return _react2.default.createElement(
 	                'div',
 	                null,

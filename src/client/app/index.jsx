@@ -10,6 +10,8 @@ require("!style!css!sass!../public/css/style.scss");
 //NEXT: EDITING a recipe
 //1. Maybe move the Addbox to render with Recipe? So confused...
 
+//fix Delete, does not work...
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -45,8 +47,7 @@ class App extends Component {
         else if (btnType === 'delButton') {
             recipeArr.splice(ind, 1)
         }
-        else if (btnType === 'editButton') {  
-        console.log('edit fired')          
+        else if (btnType === 'editButton') {       
             this.setState({
                 recipeToEdit: recipeArr[ind]
             })
@@ -54,11 +55,12 @@ class App extends Component {
         localStorage.setItem('recipes', JSON.stringify(recipeArr)); 
         this.setState({
             recipes: JSON.parse(localStorage.getItem('recipes'))
-        })        
+        })
+        //isnt it re-rendering here when i setState, so shouldn't the list of recipes
+        //re-render also down the component chain reflecting the deleted recipe?        
     }
     
     render () {
-        console.log(this.state.recipeToEdit) // logs updated recipeToEdit i.e. recipeArr[ind]
         return (
         <div>
             <div className='recipe-box container container-fluid'>
