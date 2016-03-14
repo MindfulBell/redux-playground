@@ -31,16 +31,16 @@ class Recipe extends Component {
     		<div id={recipeId} className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne'>
 		    	<div className='panel-body'>
 		    		<h4>Ingredients</h4>
-		    		<ul>
+		    		<ol>
 		    			{ingredientArr}
-		    		</ul>
+		    		</ol>
 		    		<h4>Instructions</h4>
 			    	<p>
 			    		{this.state.instructions}
 			    	</p>
-			    	<button type='delete' id='delButton' className='btn btn-danger'
+			    	<button type='delete' id='delButton' className='hvr-float-shadow btn btn-danger'
             onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)}>Delete</button>
-			    	<button type='edit' id='editButton' className='btn' data-toggle='modal' data-target='#addPopUp' 
+			    	<button type='edit' id='editButton' className='hvr-float-shadow btn' data-toggle='modal' data-target='#addPopUp' 
             onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)}>Edit</button>
 		    	</div>
     		</div>

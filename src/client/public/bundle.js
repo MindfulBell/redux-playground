@@ -147,16 +147,21 @@
 	                    'div',
 	                    { className: 'recipe-box container container-fluid' },
 	                    _react2.default.createElement(
-	                        'h2',
+	                        'h1',
 	                        null,
-	                        'Recipe Box'
+	                        'Personal Recipe Box'
 	                    ),
 	                    _react2.default.createElement(_recipeList2.default, { recipe: this.state.recipes, handleRecipe: this.handleRecipe.bind(this) })
 	                ),
 	                _react2.default.createElement(
-	                    'button',
-	                    { type: 'button', className: 'btn btn-default btn-primary', 'data-toggle': 'modal', 'data-target': '#addPopUp' },
-	                    'Add Recipe'
+	                    'div',
+	                    { className: 'text-center' },
+	                    _react2.default.createElement(
+	                        'button',
+	                        { id: 'addRecipe', type: 'button', className: 'hvr-float-shadow btn btn-default btn-primary',
+	                            'data-toggle': 'modal', 'data-target': '#addPopUp' },
+	                        'Add Recipe'
+	                    )
 	                ),
 	                _react2.default.createElement(_addbox2.default, { handleRecipe: this.handleRecipe.bind(this), editRecipe: this.state.recipeToEdit })
 	            );
@@ -21212,7 +21217,7 @@
 	              'Ingredients'
 	            ),
 	            _react2.default.createElement(
-	              'ul',
+	              'ol',
 	              null,
 	              ingredientArr
 	            ),
@@ -21228,7 +21233,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'button',
-	              { type: 'delete', id: 'delButton', className: 'btn btn-danger',
+	              { type: 'delete', id: 'delButton', className: 'hvr-float-shadow btn btn-danger',
 	                onClick: function onClick(event) {
 	                  return _this2.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id);
 	                } },
@@ -21236,7 +21241,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'button',
-	              { type: 'edit', id: 'editButton', className: 'btn', 'data-toggle': 'modal', 'data-target': '#addPopUp',
+	              { type: 'edit', id: 'editButton', className: 'hvr-float-shadow btn', 'data-toggle': 'modal', 'data-target': '#addPopUp',
 	                onClick: function onClick(event) {
 	                  return _this2.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id);
 	                } },
@@ -23719,7 +23724,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".recipe-box {\n  background-color: gray; }\n  .recipe-box h2 {\n    text-align: center; }\n\n.row {\n  width: 90%;\n  margin: 10px auto; }\n", ""]);
+	exports.push([module.id, "#background-image {\n  z-index: 1; }\n\n#background-image:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-image: url(\"http://www.ucreative.com/wp-content/uploads/2014/10/Food-photography-eastern-europe-city-illustrations-banner1.jpg\");\n  background-repeat: no-repeat;\n  background-size: cover;\n  opacity: 0.8;\n  filter: alpha(opacity=40);\n  height: 100%;\n  width: 100%; }\n\n.recipe-box {\n  margin-top: 100px;\n  padding-bottom: 65px;\n  background-color: #F2A65A;\n  border-radius: 6px;\n  box-shadow: 0px 0px 50px 8px black; }\n  .recipe-box h1 {\n    text-align: center;\n    font-family: \"Lobster Two\", cursive;\n    color: #772F1A;\n    text-shadow: 1px 1px 0px white; }\n\n.panel .panel-heading {\n  box-shadow: 0px 0px 4px black; }\n  .panel .panel-heading .panel-title {\n    font-family: \"Homemade Apple\", cursive;\n    color: #772F1A; }\n\n.panel .panel-body ol, .panel .panel-body p {\n  font-style: italic; }\n\n.row {\n  width: 85%;\n  margin: 10px auto; }\n\n.btn {\n  margin: 5px;\n  opacity: 1; }\n\n.btn:focus {\n  outline: none; }\n\n#addRecipe {\n  background-color: #772F1A;\n  border-color: #772F1A;\n  margin-top: 15px;\n  width: 175px; }\n\n#addRecipe:active {\n  border-color: #772F1A; }\n\n.hvr-float-shadow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  box-shadow: 0 0 1px transparent;\n  -webkit-backface-visibility: hidden;\n  backface-visibility: hidden;\n  -moz-osx-font-smoothing: grayscale;\n  position: relative;\n  -webkit-transition-duration: 0.3s;\n  transition-duration: 0.3s;\n  -webkit-transition-property: transform;\n  transition-property: transform; }\n\n.hvr-float-shadow:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  top: 100%;\n  left: 5%;\n  height: 10px;\n  width: 90%;\n  opacity: 0;\n  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, transparent 80%);\n  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 80%);\n  /* W3C */\n  -webkit-transition-duration: 0.3s;\n  transition-duration: 0.3s;\n  -webkit-transition-property: transform, opacity;\n  transition-property: transform, opacity; }\n\n.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {\n  -webkit-transform: translateY(-5px);\n  transform: translateY(-5px);\n  /* move the element up by 5px */ }\n\n.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {\n  opacity: 1;\n  -webkit-transform: translateY(5px);\n  transform: translateY(5px);\n  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */ }\n", ""]);
 	
 	// exports
 

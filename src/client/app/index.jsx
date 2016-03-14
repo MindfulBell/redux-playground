@@ -62,10 +62,13 @@ class App extends Component {
         return (
         <div>
             <div className='recipe-box container container-fluid'>
-              <h2>Recipe Box</h2>
+              <h1>Personal Recipe Box</h1>
                 <RecipeList recipe={this.state.recipes} handleRecipe={this.handleRecipe.bind(this)} />        
             </div>
-            <button type='button' className='btn btn-default btn-primary' data-toggle='modal' data-target='#addPopUp'>Add Recipe</button> 
+            <div className='text-center'>
+                <button id='addRecipe' type='button' className='hvr-float-shadow btn btn-default btn-primary' 
+                data-toggle='modal' data-target='#addPopUp'>Add Recipe</button> 
+            </div>
             <AddBox handleRecipe={this.handleRecipe.bind(this)} editRecipe={this.state.recipeToEdit} />           
         </div>
     )
