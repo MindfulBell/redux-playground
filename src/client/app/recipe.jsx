@@ -6,7 +6,7 @@ class Recipe extends Component {
 		super(props)
 
 		this.state = {
-    
+
 		}
 	}
 
@@ -16,11 +16,11 @@ class Recipe extends Component {
   	})
     const recipeId = this.props.ident;
     const hashedId = '#' + recipeId;
-    return (    	
+    return (
     	<div className='panel panel-default'>
     		<div className='panel-heading' role='tab' id='headingOne'>
     			<h4 className='panel-title'>
-    				<a role='button' data-toggle='collapse' data-parent='#accordion' href={hashedId} aria-expanded='false' 
+    				<a role='button' data-toggle='collapse' data-parent='#accordion' href={hashedId} aria-expanded='false'
             aria-controls={recipeId}>
     					{this.props.recipeName}
     				</a>
@@ -38,12 +38,12 @@ class Recipe extends Component {
 			    	</p>
 			    	<button type='delete' id='delButton' className='hvr-float-shadow btn btn-danger'
             onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)}>Delete</button>
-			    	<button onMouseEnter={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)} type='edit' 
+			    	<button onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)} type='edit' 
 			    	id='editButton' className='hvr-float-shadow btn' data-toggle='modal' data-target='#addPopUp'>Edit</button>
 		    	</div>
     		</div>
     	</div>
-    	)   	
+    	)
   }
 }
 
