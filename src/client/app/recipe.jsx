@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class Recipe extends Component {
-  //THIS IS WHERE EDITING GOES or does it?
 	constructor(props) {
 		super(props)
 

@@ -11,13 +11,15 @@ class AddBox extends Component {
       instructionsVal: ''
     };
   }
-
+  
+  //pull from jnmorse on Github
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      recipeVal: nextProps.recipeToEdit.recipe.recipeName,
-      ingredientsVal: nextProps.recipeToEdit.recipe.ingredients,
-      instructionsVal: nextProps.recipeToEdit.recipe.instructions
-    });
+    if (Object.keys(nextProps.recipeToEdit).length > 0) //my addition
+      this.setState({
+        recipeVal: nextProps.recipeToEdit.recipe.recipeName,
+        ingredientsVal: nextProps.recipeToEdit.recipe.ingredients,
+        instructionsVal: nextProps.recipeToEdit.recipe.instructions
+      });
   }
 
   handleChange(val) {
@@ -37,13 +39,13 @@ class AddBox extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.ingredientsVal !== '' && this.state.instructionsVal !== '' && this.state.recipeVal !== '') {
-      const ingredientsArr = this.state.ingredientsVal.split(',');
 
       //send to recipehandler
-      this.props.handleRecipe(this.props.recipeToEdit.id, event.target.id, this.state.recipeVal, ingredientsArr, this.state.instructionsVal)
+      this.props.handleRecipe(this.props.recipeToEdit.id, event.target.id, this.state.recipeVal, this.state.ingredientsVal, this.state.instructionsVal)
     }
-    //clear the add recipe form
+    //clear the add recipe form and the recipeToEdit
     this.setState({recipeVal: '', ingredientsVal: '', instructionsVal: ''})
+    this.props.clearEdit();
   }
 
   handleClose() {
@@ -51,8 +53,6 @@ class AddBox extends Component {
   }
 
   render() {
-    console.log('Recipe Name To Edit: ' + this.state.recipeVal)
-
     return (
       <div className='modal fade' tabIndex='-1' role='dialog' id='addPopUp' aria-labelledby="recipetitle" aria-hidden='true'>
         <div className='modal-dialog'>
@@ -79,7 +79,7 @@ class AddBox extends Component {
                   <label htmlFor='instructionList'>Instructions</label>
                   <textarea type='instructions' className='form-control' id='instructionInput' rows='3' max-width='250px' placeholder='Write out your instructions!' value={this.state.instructionsVal} onChange={event => this.handleChange(event.target)}></textarea>
                 </div>
-                <button type='submit' id='addButton' data-dismiss='modal' className='btn btn-primary' onClick={this.handleSubmit.bind(this)}>Save</button>
+                <button type='submit' id='saveButton' data-dismiss='modal' className='btn btn-primary' onClick={this.handleSubmit.bind(this)}>Save</button>
               </form>
             </div>
             <div className='modal-footer'>

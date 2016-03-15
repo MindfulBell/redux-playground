@@ -35,17 +35,17 @@ class App extends Component {
 
   handleRecipe(ind, btnType, name, ingredients, instructions) {
     const recipeArr = JSON.parse(localStorage.getItem('recipes'));
-
-    if (btnType === 'addButton') {
+    if (btnType === 'saveButton') {
+      //this keeps logging an error...if ingredients is not edited by user, it remains an array, so can't split it...
+      const ingredientsArr = (typeof ingredients === 'string') ? ingredients.split(',') : ingredients;
       if (ind) {
-        recipeArr[ind] = {recipeName: name, ingredients: ingredients, instructions };
+        recipeArr[ind] = {recipeName: name, ingredients: ingredientsArr, instructions };
       }
 
       else {
-        recipeArr.push({recipeName: name, ingredients: ingredients, instructions: instructions});
+        recipeArr.push({recipeName: name, ingredients: ingredientsArr, instructions: instructions});
       }
     }
-
     else if (btnType === 'delButton') {
       recipeArr.splice(ind, 1);
     }
@@ -65,6 +65,12 @@ class App extends Component {
       recipes: JSON.parse(localStorage.getItem('recipes'))
     })
   }
+  
+  clearEdit(){
+    this.setState({
+      recipeToEdit: {}
+    })
+  }
 
   render() {
     return (
@@ -74,9 +80,9 @@ class App extends Component {
           <RecipeList recipe={this.state.recipes} handleRecipe={this.handleRecipe.bind(this)}/>
         </div>
         <div className='text-center'>
-          <button id='addRecipe' type='button' className='hvr-float-shadow btn btn-default btn-primary' data-toggle='modal' data-target='#addPopUp'>Add Recipe</button>
+          <button onClick={event => this.clearEdit()} id='addRecipe' type='button' className='hvr-float-shadow btn btn-default btn-primary' data-toggle='modal' data-target='#addPopUp'>Add Recipe</button>
         </div>
-        <AddBox handleRecipe={this.handleRecipe.bind(this)} recipeToEdit={this.state.recipeToEdit}/>
+        <AddBox clearEdit ={this.clearEdit.bind(this)} handleRecipe={this.handleRecipe.bind(this)} recipeToEdit={this.state.recipeToEdit}/>
       </div>
     )
   }
