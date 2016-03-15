@@ -3,13 +3,15 @@ import Bootstrap from 'bootstrap';
 
 
 //ADD vs EDIT text on the pop up box...
+//use recipeToEdit props here somewhere, not in state necessarily, but down in the value?
+
 class AddBox extends Component {
 	constructor(props) {		
 		super(props)		
 		this.state = {
-			recipeVal: props.editRecipe.recipeName,
-			ingredientsVal: props.editRecipe.ingredients,
-			instructionsVal: props.editRecipe.instructions
+			recipeVal: '',
+			ingredientsVal: '',
+			instructionsVal: ''
 		};
 	}
 
@@ -38,17 +40,16 @@ class AddBox extends Component {
 
 		  //send to recipehandler
 		  this.props.handleRecipe(null, event.target.id, this.state.recipeVal, ingredientsArr, this.state.instructionsVal)
-
-		  //clear the add recipe form
-		  this.setState({
-		    recipeVal: '',
-		    ingredientsVal: '',
-		    instructionsVal: ''
-		  })
 		}
+		//clear the add recipe form
+	  this.setState({
+		  recipeVal: '',
+		  ingredientsVal: '',
+		  instructionsVal: ''
+		})
 	}
 	
-	handleClose(event){
+	handleClose(){
 		this.setState({
 			recipeVal: '',
 			ingredientsVal: '',
@@ -56,8 +57,8 @@ class AddBox extends Component {
 		})
 	}
 
-//e.preventDefault() for the submit button
   render () {
+  	console.log(this.props.recipeToEdit.recipeName)
     return  (
       <div className='modal fade' tabIndex='-1' role='dialog' id='addPopUp' aria-labelledby="recipetitle" aria-hidden='true'>
       	<div className='modal-dialog'>      	
@@ -94,7 +95,7 @@ class AddBox extends Component {
 			        </form>
 	      		</div>
 	      		<div className='modal-footer'>
-	      			<button type='button' className='btn btn-danger' data-dismiss='modal' >Close</button>
+	      			<button onClick={event => this.handleClose(event.target)}type='button' className='btn btn-danger' data-dismiss='modal' >Close</button>
 			    </div>
 	      	</div>
 	    </div>	    

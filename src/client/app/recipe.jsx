@@ -6,14 +6,14 @@ class Recipe extends Component {
 		super(props)
 
 		this.state = {
-      ingredients: this.props.ingredients,
-      instructions: this.props.instructions,
-      recipeName: this.props.recipeName      
+      ingredients: '',
+      instructions: '',
+      recipeName: ''     
 		}
 	}
 
   render () {
-  	const ingredientArr = this.state.ingredients.map((ingredient, ind)=>{
+  	const ingredientArr = this.props.ingredients.map((ingredient, ind)=>{
   		return <li key={ind}>{ingredient}</li>
   	})
     const recipeId = this.props.ident;
@@ -24,7 +24,7 @@ class Recipe extends Component {
     			<h4 className='panel-title'>
     				<a role='button' data-toggle='collapse' data-parent='#accordion' href={hashedId} aria-expanded='false' 
             aria-controls={recipeId}>
-    					{this.state.recipeName}
+    					{this.props.recipeName}
     				</a>
     			</h4>
     		</div>
@@ -36,12 +36,12 @@ class Recipe extends Component {
 		    		</ol>
 		    		<h4>Instructions</h4>
 			    	<p>
-			    		{this.state.instructions}
+			    		{this.props.instructions}
 			    	</p>
 			    	<button type='delete' id='delButton' className='hvr-float-shadow btn btn-danger'
             onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)}>Delete</button>
-			    	<button type='edit' id='editButton' className='hvr-float-shadow btn' data-toggle='modal' data-target='#addPopUp' 
-            onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)}>Edit</button>
+			    	<button onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)} type='edit' 
+			    	id='editButton' className='hvr-float-shadow btn' data-toggle='modal' data-target='#addPopUp'>Edit</button>
 		    	</div>
     		</div>
     	</div>

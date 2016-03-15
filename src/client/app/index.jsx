@@ -10,8 +10,6 @@ require("!style!css!sass!../public/css/style.scss");
 //NEXT: EDITING a recipe
 //1. Maybe move the Addbox to render with Recipe? So confused...
 
-//fix Delete, does not work...
-
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -47,7 +45,7 @@ class App extends Component {
         else if (btnType === 'delButton') {
             recipeArr.splice(ind, 1)
         }
-        else if (btnType === 'editButton') {       
+        else {       
             this.setState({
                 recipeToEdit: recipeArr[ind]
             })
@@ -71,7 +69,7 @@ class App extends Component {
                 <button id='addRecipe' type='button' className='hvr-float-shadow btn btn-default btn-primary' 
                 data-toggle='modal' data-target='#addPopUp'>Add Recipe</button> 
             </div>
-            <AddBox handleRecipe={this.handleRecipe.bind(this)} editRecipe={this.state.recipeToEdit} />           
+            <AddBox handleRecipe={this.handleRecipe.bind(this)} recipeToEdit={this.state.recipeToEdit} />           
         </div>
     )
   }
