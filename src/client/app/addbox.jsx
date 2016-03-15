@@ -15,6 +15,14 @@ class AddBox extends Component {
 		};
 	}
 
+	componentWillReceiveProps(){
+		this.setState({
+			recipeVal: this.props.recipeToEdit.recipeName,
+			ingredientsVal: this.props.recipeToEdit.ingredients,
+			instructionsVal: this.props.recipeToEdit.instructions
+		})
+	}
+
 	handleChange(val){
 	  if (val.id === 'recipeInput') {
 	    this.setState({
@@ -58,13 +66,15 @@ class AddBox extends Component {
 	}
 
   render () {
-  	console.log(this.props.recipeToEdit.recipeName)
+  	console.log('Recipe Name To Edit: ' + this.state.recipeVal)
+
     return  (
       <div className='modal fade' tabIndex='-1' role='dialog' id='addPopUp' aria-labelledby="recipetitle" aria-hidden='true'>
       	<div className='modal-dialog'>      	
 	      	<div className='modal-content'>
 	      		<div className='modal-header'>
-	      			<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+	      			<button onClick={event => this.handleClose()} type="button" 
+	      			className="close" data-dismiss="modal">
 	      			<span aria-hidden="true">&times;</span>
 	      			</button>
 	        		<h4 className='modal-title' id='recipetitle'>
@@ -95,7 +105,7 @@ class AddBox extends Component {
 			        </form>
 	      		</div>
 	      		<div className='modal-footer'>
-	      			<button onClick={event => this.handleClose(event.target)}type='button' className='btn btn-danger' data-dismiss='modal' >Close</button>
+	      			<button onClick={event => this.handleClose()} type='button' className='btn btn-danger' data-dismiss='modal' >Close</button>
 			    </div>
 	      	</div>
 	    </div>	    

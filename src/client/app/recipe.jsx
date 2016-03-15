@@ -6,9 +6,7 @@ class Recipe extends Component {
 		super(props)
 
 		this.state = {
-      ingredients: '',
-      instructions: '',
-      recipeName: ''     
+    
 		}
 	}
 
@@ -40,7 +38,7 @@ class Recipe extends Component {
 			    	</p>
 			    	<button type='delete' id='delButton' className='hvr-float-shadow btn btn-danger'
             onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)}>Delete</button>
-			    	<button onClick={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)} type='edit' 
+			    	<button onMouseEnter={event => this.props.handleRecipe(event.target.parentNode.parentNode.id, event.target.id)} type='edit' 
 			    	id='editButton' className='hvr-float-shadow btn' data-toggle='modal' data-target='#addPopUp'>Edit</button>
 		    	</div>
     		</div>

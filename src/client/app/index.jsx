@@ -53,9 +53,7 @@ class App extends Component {
         localStorage.setItem('recipes', JSON.stringify(recipeArr)); 
         this.setState({
             recipes: JSON.parse(localStorage.getItem('recipes'))
-        })
-        //isnt it re-rendering here when i setState, so shouldn't the list of recipes
-        //re-render also down the component chain reflecting the deleted recipe?        
+        })        
     }
     
     render () {
