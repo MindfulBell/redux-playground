@@ -1,4 +1,4 @@
-This is a recipe box built for the FreeCodeCamp curriculum. It is my 4th project built using React.js
+This is a boiler plate setup that has React, redux, Bootstrap, and SASS.
 
 
 
