@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import { createStore } from 'redux';
 require("../public/css/style.scss");
 
 /*
@@ -7,24 +8,40 @@ require("../public/css/style.scss");
 Boilerplate for any react project w/redux, sass, bootstrap installed
 Please don't forget to change your remote origin!!!
 
+Notes: Reducers must be pure functions
+        API of store is:          
+          Its API is { subscribe, dispatch, getState }.
+
 */
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-     
-    };
+let store = createStore(counter);
+
+function counter(state = 0, action) {
+    switch(action.type){
+      case 'INCREMENT': 
+        return state + 1
+      case 'DECREMENT':
+        return state - 1
+      default:
+        return state
+    }
   }
 
-  render() {
+class App extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  render () {
     return (
-      <div>
-        <h1> INSERT APP HERE!</h1>
+      <div className='container'>
+        <p><span>Counter: {store.getState()} </span></p>
+        <button onClick={() => store.dispatch({ type: 'INCREMENT' })}>+</button>
+        <button onClick={() => store.dispatch({ type: 'DECREMENT' })}>-</button>
       </div>
-    );
+      );
   }
 }
 
-render(
-  <App/>, document.getElementById('app'));
+
+render(<App/>, document.getElementById('app'));
