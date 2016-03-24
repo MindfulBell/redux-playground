@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import { createStore } from 'redux';
+import { connect } from 'react-redux';
 require("../public/css/style.scss");
 
 /*
@@ -28,9 +29,6 @@ function counter(state = 0, action) {
   }
 
 class App extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
   render () {
     return (
@@ -43,5 +41,10 @@ class App extends React.Component {
   }
 }
 
+const renderApp = () => {
+  render(<App/>, document.getElementById('app'));
+}
 
-render(<App/>, document.getElementById('app'));
+store.subscribe(renderApp)
+renderApp();
+
